@@ -1,0 +1,20 @@
+#!/bin/bash
+
+read -p "Enter Version: "  version
+wget https://github.com/wavesplatform/Waves/releases/download/v"$version"/waves_"$version"_all.deb
+echo "downloaded $version!"
+
+service waves stop
+echo "service is stopped"
+sleep 5
+
+dpkg -i waves_1.1.3_all.deb
+echo "package is been installed"
+sleep 5
+
+service waves start
+echo "service is started"
+sleep 5
+
+journalctl -u waves.service -f
+
