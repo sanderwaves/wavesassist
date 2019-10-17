@@ -1,17 +1,23 @@
 #!/bin/bash
 
+#Put in the information that is needed
 read -p "Enter Version: "  version
+
+#Downloading the new version
 wget https://github.com/wavesplatform/Waves/releases/download/v"$version"/waves_"$version"_all.deb
 echo "downloaded $version!"
 
+#Stop the waves service
 service waves stop
 echo "service is stopped"
 sleep 5
 
-dpkg -i waves_1.1.3_all.deb
+#Install new version
+dpkg -i waves_"$version"_all.deb
 echo "package is been installed"
 sleep 5
 
+#Starting waves service again
 service waves start
 echo "service is started"
 sleep 5
