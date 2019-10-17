@@ -26,5 +26,5 @@ service waves start
 echo "service is started"
 sleep 5
 
-#show logging
+#show loggings
 journalctl -u waves.service -f
