@@ -7,6 +7,10 @@ read -p "Enter Version: "  version
 wget https://github.com/wavesplatform/Waves/releases/download/v"$version"/waves_"$version"_all.deb
 echo "downloaded $version!"
 
+#backup the waves.conf file
+cp /usr/share/waves/conf/waves.conf ~/
+echo Backup is made to Home directoy
+
 #Stop the waves service
 service waves stop
 echo "service is stopped"
@@ -22,5 +26,5 @@ service waves start
 echo "service is started"
 sleep 5
 
+#show logging
 journalctl -u waves.service -f
-
