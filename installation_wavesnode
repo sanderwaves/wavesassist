@@ -1,5 +1,7 @@
 #!/bin/bash
 
+echo "This installation script is made by WavesAssist"
+
 echo "Fill in the port number which one you would like to use when you use putty (ssh to your server)"
 read -p "Enter new port: "  port
 echo "Fill in the username which one you would like to use when logging into the server. This username will be used to login and after that you can login to the root user."
@@ -126,6 +128,11 @@ rm base58string
 rm base58script.py
 rm waves_"$version"_all.deb
 rm blockchain_last.tar
+
+#Thank you for using the installation script
+echo "I want to thank you that you using my installation script! 
+If you want to lease a small amount of your waves to Wavesassist node for in return, I would be very happy! "
+sleep 30
 
 #open journalctl to see if everything works
 journalctl -u waves -f
