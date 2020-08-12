@@ -1,0 +1,39 @@
+#!/bin/bash
+
+#Put in the information that is needed
+read -p "Enter Version: "  version
+
+#download last state of blockchain
+wget http://blockchain.wavesnodes.com/blockchain_last.tar
+echo "Downloaded the blockchain"
+sleep 20
+
+#Downloading the new version
+wget https://github.com/wavesplatform/Waves/releases/download/v"$version"/waves_"$version"_all.deb
+echo "downloaded $version!"
+
+#Stop the waves service
+service waves stop
+echo "service is stopped"
+sleep 5
+
+#Install new version
+dpkg -i waves_"$version"_all.deb
+echo "package is been installed"
+sleep 5
+
+#remove old state
+rm -rdf /var/lib/waves/data
+
+#import new state
+tar -xvf blockchain_last.tar -C /var/lib/waves/
+echo "The blockchain is succesfully imported"
+
+#Starting waves service again
+service waves start
+echo "service is started"
+sleep 5
+
+journalctl -u waves.service -f
+
+
